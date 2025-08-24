@@ -44,6 +44,14 @@ h1, h2, h3 {
   background-size: var(--s) calc(var(--s)*tan(30deg));
 }
 
+.btn-primary {
+  @apply p-2 pl-6 pr-6 mt-4 mb-14 cursor-pointer text-xl text-white bg-gradient-to-r from-orange-400 to-red-400 rounded-full font-bold flex items-center justify-center gap-1;
+}
+
+.text-gradient {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-purple-800 to-blue-800;
+}
+
 /* breakout */
 /* see https://www.youtube.com/watch?v=c13gpBrnGEw */
 /* TODO: make tailwind utility */
