@@ -10,7 +10,7 @@ export default function Home() {
           <Image
             src="/Dice.svg"
             width={25}
-            height={2250}
+            height={25}
             alt="Dice"
           />
           Random Pokémon</button>
