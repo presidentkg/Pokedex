@@ -1,3 +1,4 @@
+import RandomPokemons from "@/components/RandomPokemons";
 import Image from "next/image";
 
 export default function Home() {
@@ -14,6 +15,27 @@ export default function Home() {
             alt="Dice"
           />
           Random Pokémon</button>
+      </section>
+      <section className="flex justify-center mt-10 mb-10">
+        <div className="flex items-center w-full max-w-lg rounded-lg shadow-md">
+          <input
+            type="search"
+            placeholder="Search for a Pokémon..."
+            className="flex-grow rounded-l-full text-gray-700 focus:outline-none px-4"
+          />
+          <button className="flex items-center justify-center h-10 w-10 m-2 rounded-lg bg-blue-400 hover:bg-blue-500 transition-colors">
+            <Image
+              src="/Search.svg"
+              alt="Search icon"
+              width={20}
+              height={20}
+            />
+          </button>
+        </div>
+      </section>
+      <section className="flex flex-col items-center gap-4 bg-gradient-to-br [background-image:linear-gradient(-10deg,_#F4E7FA,_#FFFFFF)] p-14">
+        <h2 className="text-4xl">Featured Pokémon</h2>
+        <RandomPokemons numberOfPokemonToFetch={4} />
       </section>
     </main>
   );
