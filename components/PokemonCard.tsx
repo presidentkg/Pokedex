@@ -1,0 +1,61 @@
+import { PokemonData } from "@/lib/interfaces";
+import { textColors, typeColorsBg, typeColorsBgLighter, typeColorsBorder } from "@/lib/pokemon-colors";
+import Image from "next/image";
+
+export default function PokemonCard({
+  name,
+  id,
+  image,
+  types,
+  hp,
+  attack,
+  defense,
+}: PokemonData) {
+  const primaryType = types[0];
+  const primaryColorBg = typeColorsBg[primaryType.toLowerCase()] || "bg-gray-400";
+  const primaryColorBgLighter = typeColorsBgLighter[primaryType.toLowerCase()] || "bg-gray-200";
+  const primaryColorBorder = typeColorsBorder[primaryType.toLowerCase()] || "border-gray-400";
+  const primaryColorText = textColors[primaryType.toLowerCase()] || "text-white";
+
+  const typeTextColor =
+    primaryType.toLowerCase() === "electric" ? "text-gray-800" : "text-white";
+
+  return (
+    <div className="flex flex-col items-center w-50 h-96 rounded-2xl bg-[#F1FDFF] p-6 shadow-md border-4 border-blue-400">
+      <div className={`flex items-center justify-center h-28 w-28 rounded-full border-4 ${primaryColorBorder} bg-white`}>
+        <Image src={image} alt={name} width={96} height={96} />
+      </div>
+      <div className="flex flex-col items-center mt-4">
+        <span className={`px-2 py-0.5 text-sm font-bold ${primaryColorText} rounded-full ${primaryColorBgLighter}`}>
+          #{String(id).padStart(3, "0")}
+        </span>
+        <h3 className="mt-2 text-2xl font-bold capitalize text-gray-800">
+          {name}
+        </h3>
+      </div>
+      <div className="flex gap-2 mt-2">
+        {types.map((type) => (
+          <span
+            key={type}
+            className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${typeColorsBg[type.toLowerCase()] || "bg-gray-400"} text-white`}
+          >
+            {type}
+          </span>
+        ))}
+      </div>
+      <div className="mt-4 w-full text-gray-700">
+        <div className="flex justify-between">
+          <span>HP</span>
+          <span className="font-bold">{hp}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Attack</span>
+          <span className="font-bold">{attack}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Defense</span>
+          <span className="font-bold">{defense}</span>
+        </div>
+      </div>
+    </div>
+)};
