@@ -13,8 +13,8 @@
             "label": "Types"
         },
         {
-            "href": "/favorites",
-            "label": "Favorites"
+            "href": "/search",
+            "label": "Search"
         }
     ]
 }

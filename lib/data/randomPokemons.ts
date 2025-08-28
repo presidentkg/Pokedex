@@ -1,12 +1,4 @@
-interface PokemonData {
-  name: string;
-  id: number;
-  image: string;
-  types: string[];
-  hp: number;
-  attack: number;
-  defense: number;
-}
+import { PokemonData, PokemonStat, PokemonType } from "../interfaces";
 
 const generateRandomIds = (count: number): number[] => {
   const ids = new Set<number>();
@@ -32,14 +24,15 @@ export const fetchRandomPokemon = async (
   );
 
   const data = await Promise.all(fetchPromises);
+  const transformedPokemons: PokemonData[] = data.map((pokemon) => ({
+              name: pokemon.name,
+              id: pokemon.id,
+              image: pokemon.sprites.other["official-artwork"].front_default || null,
+              types: pokemon.types.map((typeObj: PokemonType) => typeObj.type.name),
+              hp: pokemon.stats.find((statObj: PokemonStat) => statObj.stat.name === 'hp')?.base_stat || 0,
+              attack: pokemon.stats.find((statObj: PokemonStat) => statObj.stat.name === 'attack')?.base_stat || 0,
+              defense: pokemon.stats.find((statObj: PokemonStat) => statObj.stat.name === 'defense')?.base_stat || 0,
+          }));
 
-  return data.map((pokemon) => ({
-    name: pokemon.name,
-    id: pokemon.id,
-    image: pokemon.sprites.front_default,
-    types: pokemon.types.map((typeObj: any) => typeObj.type.name),
-    hp: pokemon.stats[0].base_stat,
-    attack: pokemon.stats[1].base_stat,
-    defense: pokemon.stats[2].base_stat,
-  }));
+  return transformedPokemons
 };
