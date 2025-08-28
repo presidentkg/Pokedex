@@ -85,3 +85,15 @@ export const textColors: { [key: string]: string } = {
   fairy: "text-[#b876aa]",
   unknown: "text-[#638275]",
 };
+
+export const generationColors: { [key: number]: string } = {
+  1: "bg-[#ea7a3c]",
+  2: "bg-[#539ae2]",
+  3: "bg-[#71c558]",
+  4: "bg-[#e5c531]",
+  5: "bg-[#e5709b]",
+  6: "bg-[#89a1b0]",
+  7: "bg-[#cb5f48]",
+  8: "bg-[#846ab6]",
+  9: "bg-[#e397d1]",
+};
