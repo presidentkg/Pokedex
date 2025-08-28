@@ -10,9 +10,13 @@ export default function RandomPokemonBtn() {
     const [pokemon, setPokemon] = useState<PokemonData | null>(null);
 
     const handleRandomPokemonBtnClick = async () => {
+      try{
         const data = await fetchRandomPokemon(1);
         if(data.length !== 0)
           setPokemon(data[0]);
+      } catch (error) {
+        return <div>Couldn't load pokemon, try again later!</div>;
+      }
     };
   return(
     <div>
