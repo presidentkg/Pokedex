@@ -28,8 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jaldi.variable} ${jersey.variable} antialiased`}>
-        <div className="flex min-h-screen flex-col">
+      <body className={`${jaldi.variable} ${jersey.variable} antialiased flex flex-col min-h-screen`}>
           <header className="content-grid">
             <NavBar />
           </header>
@@ -39,7 +38,6 @@ export default function RootLayout({
           <footer>
             <Footer />
           </footer>
-        </div>
       </body>
     </html>
   );
