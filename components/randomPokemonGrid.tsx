@@ -7,7 +7,7 @@ export default async function randomPokemonGrid({ numberOfPokemonToFetch }: { nu
     try {
         pokemonList = await fetchRandomPokemon(numberOfPokemonToFetch);
     } catch (error) {
-        return <div>Kunde inte ladda Pokémon. Var god försök igen senare.</div>;
+        return <div>Couldn't load pokemon, try again later!</div>;
     }
   return (
     <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-8 mt-8">
