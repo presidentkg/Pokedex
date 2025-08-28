@@ -1,0 +1,49 @@
+"use client";
+
+import { useState } from "react";
+import GenerationBtn from "./generationBtn";
+import { PokemonData } from "@/lib/interfaces";
+import { fetchPokemonGeneration } from "@/lib/data/fetchPokemonGeneration";
+import PokemonCard from "./pokemonCard";
+
+export default function GenerationDisplays() {
+    const [pokemonList, setPokemon] = useState<PokemonData[] | null>(null);
+
+    const handlePokemonBtnClick = async (generation: number) => {
+        if (pokemonList) {
+            setPokemon(null);
+        } else{
+            try{
+                const data = await fetchPokemonGeneration(generation);
+                if(data.length !== 0)
+                    setPokemon(data);
+            } catch (error) {
+                setPokemon(null);
+                return <div>Couldn't load pokemon, try again later!</div>;
+            }
+        }
+    };
+
+    return (
+        <div>
+            <div className="flex gap-4">
+                <GenerationBtn generation={1} onClick={handlePokemonBtnClick}/>
+                <GenerationBtn generation={2} onClick={handlePokemonBtnClick}/>
+                <GenerationBtn generation={3} onClick={handlePokemonBtnClick}/>
+                <GenerationBtn generation={4} onClick={handlePokemonBtnClick}/>
+                <GenerationBtn generation={5} onClick={handlePokemonBtnClick}/>
+                <GenerationBtn generation={6} onClick={handlePokemonBtnClick}/>
+                <GenerationBtn generation={7} onClick={handlePokemonBtnClick}/>
+                <GenerationBtn generation={8} onClick={handlePokemonBtnClick}/>
+                <GenerationBtn generation={9} onClick={handlePokemonBtnClick}/>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-8 mt-8">
+                {pokemonList &&  (
+                    pokemonList.map((pokemon) => (
+                        <PokemonCard key={pokemon.id} {...pokemon} />
+                    ))
+                )}
+            </div>
+        </div>
+    );
+}
