@@ -1,4 +1,3 @@
-import PokemonSearch from "@/components/pokemonSearch";
 import SearchBar from "@/components/searchBar";
 import RandomPokemonBtn from "@/components/randomPokemonBtn";
 import RandomPokemonGrid from "@/components/randomPokemonGrid";
