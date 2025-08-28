@@ -12,27 +12,9 @@ export default function PokemonCard({
   defense,
 }: PokemonData) {
   const primaryType = types[0];
-  let primaryColorBg;
-  let primaryColorBgLighter;
-  let primaryColorBorder;
-  let primaryColorText;
-  if (primaryType === undefined){
-    primaryColorBg = "bg-gray-400";
-    primaryColorBgLighter = "bg-gray-200";
-    primaryColorBorder = "border-gray-400";
-    primaryColorText = "text-white";
-  }
-  else{
-    primaryColorBg = typeColorsBg[primaryType];
-    primaryColorBgLighter = typeColorsBgLighter[primaryType];
-    primaryColorBorder = typeColorsBorder[primaryType];
-    primaryColorText = textColors[primaryType];
-  }
-
-
   return (
     <div className="flex flex-col items-center w-50 h-96 rounded-2xl bg-[#F1FDFF] p-6 shadow-md border-4 border-blue-400">
-      <div className={`flex items-center justify-center h-28 w-28 rounded-full border-4 ${primaryColorBorder} bg-white`}>
+      <div className={`flex items-center justify-center h-28 w-28 rounded-full border-4 ${typeColorsBorder[primaryType] || "border-gray-400"} bg-white`}>
         {image ? (
         <Image src={image} alt={name} width={96} height={96} />
         ) : (
@@ -40,7 +22,7 @@ export default function PokemonCard({
         )}
       </div>
       <div className="flex flex-col items-center mt-4">
-        <span className={`px-2 py-0.5 text-sm font-bold ${primaryColorText} rounded-full ${primaryColorBgLighter}`}>
+        <span className={`px-2 py-0.5 text-sm font-bold ${textColors[primaryType] || "text-white"} rounded-full ${typeColorsBgLighter[primaryType] || "bg-gray-200"}`}>
           #{String(id).padStart(3, "0")}
         </span>
         <h3 className="mt-2 text-2xl font-bold capitalize text-gray-800">
