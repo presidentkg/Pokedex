@@ -20,7 +20,7 @@ export default async function Search({
     }
 
     return(
-        <div className="flex flex-col items-center gap-4 mt-10 mb-10">
+        <div className="flex flex-col items-center gap-4 bg-gradient-to-br [background-image:linear-gradient(-10deg,_#F4E7FA,_#FFFFFF)] p-14 min-h-screen">
             <div className="w-full max-w-4xl">
                 <PokemonSearch />
             </div>
