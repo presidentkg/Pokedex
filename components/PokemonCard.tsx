@@ -12,18 +12,32 @@ export default function PokemonCard({
   defense,
 }: PokemonData) {
   const primaryType = types[0];
-  const primaryColorBg = typeColorsBg[primaryType.toLowerCase()] || "bg-gray-400";
-  const primaryColorBgLighter = typeColorsBgLighter[primaryType.toLowerCase()] || "bg-gray-200";
-  const primaryColorBorder = typeColorsBorder[primaryType.toLowerCase()] || "border-gray-400";
-  const primaryColorText = textColors[primaryType.toLowerCase()] || "text-white";
+  let primaryColorBg;
+  let primaryColorBgLighter;
+  let primaryColorBorder;
+  let primaryColorText;
+  if (primaryType === undefined){
+    primaryColorBg = "bg-gray-400";
+    primaryColorBgLighter = "bg-gray-200";
+    primaryColorBorder = "border-gray-400";
+    primaryColorText = "text-white";
+  }
+  else{
+    primaryColorBg = typeColorsBg[primaryType];
+    primaryColorBgLighter = typeColorsBgLighter[primaryType];
+    primaryColorBorder = typeColorsBorder[primaryType];
+    primaryColorText = textColors[primaryType];
+  }
 
-  const typeTextColor =
-    primaryType.toLowerCase() === "electric" ? "text-gray-800" : "text-white";
 
   return (
     <div className="flex flex-col items-center w-50 h-96 rounded-2xl bg-[#F1FDFF] p-6 shadow-md border-4 border-blue-400">
       <div className={`flex items-center justify-center h-28 w-28 rounded-full border-4 ${primaryColorBorder} bg-white`}>
+        {image ? (
         <Image src={image} alt={name} width={96} height={96} />
+        ) : (
+          <div className="px-4 text-center text-lg font-bold">No image available</div>
+        )}
       </div>
       <div className="flex flex-col items-center mt-4">
         <span className={`px-2 py-0.5 text-sm font-bold ${primaryColorText} rounded-full ${primaryColorBgLighter}`}>
@@ -37,7 +51,7 @@ export default function PokemonCard({
         {types.map((type) => (
           <span
             key={type}
-            className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${typeColorsBg[type.toLowerCase()] || "bg-gray-400"} text-white`}
+            className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${typeColorsBg[type] || "bg-gray-400"} text-white`}
           >
             {type}
           </span>
