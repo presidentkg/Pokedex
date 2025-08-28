@@ -1,4 +1,5 @@
 import PokemonSearch from "@/components/pokemonSearch";
+import SearchBar from "@/components/searchBar";
 import RandomPokemonBtn from "@/components/randomPokemonBtn";
 import RandomPokemonGrid from "@/components/randomPokemonGrid";
 
@@ -13,7 +14,7 @@ export default function Home() {
       </section>
       <section className="flex justify-center mt-10 mb-10">
         <div className="w-full max-w-lg">
-          <PokemonSearch />
+          <SearchBar />
         </div>
       </section>
       <section className="flex flex-col items-center gap-4 bg-gradient-to-br [background-image:linear-gradient(-10deg,_#F4E7FA,_#FFFFFF)] p-14">

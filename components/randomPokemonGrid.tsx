@@ -1,4 +1,4 @@
-import PokemonCard from "@/components/PokemonCard";
+import PokemonCard from "@/components/pokemonCard";
 import { fetchRandomPokemon } from "@/lib/data/randomPokemons";
 import { PokemonData } from "@/lib/interfaces";
 

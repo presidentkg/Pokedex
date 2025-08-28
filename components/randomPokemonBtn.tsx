@@ -4,7 +4,7 @@ import { fetchRandomPokemon } from "@/lib/data/randomPokemons";
 import { PokemonData } from "@/lib/interfaces";
 import Image from "next/image";
 import { useState } from "react";
-import PokemonCard from "@/components/PokemonCard";
+import PokemonCard from "@/components/pokemonCard";
 
 export default function RandomPokemonBtn() {
     const [pokemon, setPokemon] = useState<PokemonData | null>(null);
