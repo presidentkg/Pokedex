@@ -12,15 +12,14 @@ export default function GenerationDisplays() {
     const handlePokemonBtnClick = async (generation: number) => {
         if (pokemonList) {
             setPokemon(null);
-        } else{
-            try{
-                const data = await fetchPokemonGeneration(generation);
-                if(data.length !== 0)
-                    setPokemon(data);
-            } catch (error) {
-                setPokemon(null);
-                return <div>Couldn't load pokemon, try again later!</div>;
-            }
+        }
+        try{
+            const data = await fetchPokemonGeneration(generation);
+            if(data.length !== 0)
+                setPokemon(data);
+        } catch (error) {
+            setPokemon(null);
+            return <div>Couldn't load pokemon, try again later!</div>;
         }
     };
 
