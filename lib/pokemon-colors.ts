@@ -97,3 +97,39 @@ export const generationColors: { [key: number]: string } = {
   8: "bg-[#846ab6]",
   9: "bg-[#e397d1]",
 };
+
+export const generationColorsLighter: { [key: number]: string } = {
+  1: "bg-[#f9d7c6]",
+  2: "bg-[#c6e1fa]",
+  3: "bg-[#cfeac5]",
+  4: "bg-[#f5eeb3]",
+  5: "bg-[#f9cce1]",
+  6: "bg-[#e1e5e8]",
+  7: "bg-[#eac5be]",
+  8: "bg-[#d4cae9]",
+  9: "bg-[#f9e0f3]",
+};
+
+export const generationColorsBorder: { [key: number]: string } = {
+  1: "border-[#f5b89a]",
+  2: "border-[#a3c9f0]",
+  3: "border-[#b1e2a0]",
+  4: "border-[#f0e29b]",
+  5: "border-[#f0b5ce]",
+  6: "border-[#c4cfd6]",
+  7: "border-[#e2a89c]",
+  8: "border-[#c2b5e2]",
+  9: "border-[#f0c5e7]",
+};
+
+export const generationTextColors: { [key: number]: string } = {
+  1: "text-[#c45f2a]",
+  2: "text-[#346da2]",
+  3: "text-[#589d42]",
+  4: "text-[#b8a02d]",
+  5: "text-[#b85b80]",
+  6: "text-[#697f8c]",
+  7: "text-[#974d39]",
+  8: "text-[#65528c]",
+  9: "text-[#b876aa]",
+};

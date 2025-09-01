@@ -1,22 +1,25 @@
 "use client";
 
-import { generationColors } from "@/lib/pokemon-colors";
+import { generationColors, generationColorsBorder, generationColorsLighter, generationTextColors } from "@/lib/pokemon-colors";
 
 export default function GenerationBtn({
-  generation,
+  gen,
   onClick,
+  isActive
 }: {
-  generation: number;
-  onClick: (generation: number) => void;
+  gen: number;
+  onClick: (gen: number) => void;
+  isActive: boolean;
 }) {
-    return(
+  const activeClassName = isActive ? `border-4 ${generationColorsBorder[gen]} ${generationColorsLighter[gen]} ${generationTextColors[gen]}` : `text-white ${generationColors[gen]}`;
+  return(
     <div>
         <button
-            className={`p-2 pl-6 pr-6 mt-4 mb-14 cursor-pointer text-xl text-white rounded-full font-bold flex items-center justify-center gap-1 ${generationColors[generation]}`} 
-            onClick={() => onClick(generation)}
+            className={`p-2 pl-6 pr-6 mt-4 mb-14 cursor-pointer text-xl rounded-full font-bold flex items-center justify-center gap-1 ${activeClassName}`} 
+            onClick={() => onClick(gen)}
         >
-            Gen {generation}
+            Gen {gen}
         </button>
     </div>
-    );
+  );
 }
