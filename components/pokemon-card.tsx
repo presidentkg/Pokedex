@@ -2,15 +2,8 @@ import { PokemonData } from "@/lib/interfaces";
 import { textColors, typeColorsBg, typeColorsBgLighter, typeColorsBorder } from "@/lib/pokemon-colors";
 import Image from "next/image";
 
-export default function PokemonCard({
-  name,
-  id,
-  image,
-  types,
-  hp,
-  attack,
-  defense,
-}: PokemonData) {
+export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
+  const { id, name, types, image, hp, attack, defense } = pokemon;
   const primaryType = types[0];
   return (
     <div className="flex flex-col items-center w-50 h-96 rounded-2xl bg-[#F1FDFF] p-6 shadow-md border-4 border-blue-400">

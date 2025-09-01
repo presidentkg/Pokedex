@@ -33,7 +33,7 @@ export default function RandomPokemonBtn() {
           Random Pokémon
       </button>
       {pokemon && (
-        <PokemonCard {...pokemon} />
+        <PokemonCard pokemon={pokemon} />
       )}
     </div>
   );

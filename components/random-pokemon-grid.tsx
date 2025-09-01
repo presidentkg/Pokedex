@@ -12,7 +12,7 @@ export default async function randomPokemonGrid({ numberOfPokemonToFetch }: { nu
   return (
     <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-8 mt-8">
     {pokemonList.map((pokemon) => (
-        <PokemonCard key={pokemon.id} {...pokemon} />
+        <PokemonCard key={pokemon.id} pokemon={pokemon} />
     ))}
     </div>
   );

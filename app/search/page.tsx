@@ -27,7 +27,7 @@ export default async function Search({
             <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-8 mt-8">
             {matchingPokemonData.length > 0 ? (
                 matchingPokemonData.map((pokemon) => (
-                    <PokemonCard key={pokemon.id} {...pokemon} />
+                    <PokemonCard key={pokemon.id} pokemon={pokemon} />
                 ))
             ) : (
                 query !== "" && <p>No Pokémon found for your search.</p>

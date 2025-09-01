@@ -39,7 +39,7 @@ export default function GenerationDisplays() {
             <div className="flex flex-wrap gap-8 mt-8 justify-center">
                 {pokemonList &&  (
                     pokemonList.map((pokemon) => (
-                        <PokemonCard key={pokemon.id} {...pokemon} />
+                        <PokemonCard key={pokemon.id} pokemon={pokemon} />
                     ))
                 )}
             </div>
