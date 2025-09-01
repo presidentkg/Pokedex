@@ -19,7 +19,7 @@ export async function fetchPokemon(
             attack: pokemon.stats.find((statObj: PokemonStat) => statObj.stat.name === 'attack')?.base_stat || 0,
             defense: pokemon.stats.find((statObj: PokemonStat) => statObj.stat.name === 'defense')?.base_stat || 0,
         }));
-        transformedPokemons.sort((a, b) => a.id - b.id);
+        transformedPokemons.sort((a, b) => a.name.localeCompare(b.name));
         return transformedPokemons;
     } catch (e) {
         return [];
