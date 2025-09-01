@@ -1,5 +1,5 @@
-import PokemonCard from "@/components/pokemonCard";
-import { fetchRandomPokemon } from "@/lib/data/randomPokemons";
+import PokemonCard from "@/components/pokemon-card";
+import { fetchRandomPokemon } from "@/lib/data/random-pokemon";
 import { PokemonData } from "@/lib/interfaces";
 
 export default async function randomPokemonGrid({ numberOfPokemonToFetch }: { numberOfPokemonToFetch: number }) {

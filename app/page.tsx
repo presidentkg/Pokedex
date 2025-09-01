@@ -1,6 +1,6 @@
-import SearchBar from "@/components/searchBar";
-import RandomPokemonBtn from "@/components/randomPokemonBtn";
-import RandomPokemonGrid from "@/components/randomPokemonGrid";
+import SearchBar from "@/components/search-bar";
+import RandomPokemonBtn from "@/components/random-pokemon-btn";
+import RandomPokemonGrid from "@/components/random-pokemon-grid";
 
 
 export default function Home() {

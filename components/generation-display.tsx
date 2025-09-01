@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import GenerationBtn from "./generationBtn";
+import GenerationBtn from "./generation-btn";
 import { PokemonData } from "@/lib/interfaces";
-import { fetchPokemonGeneration } from "@/lib/data/fetchPokemonGeneration";
-import PokemonCard from "./pokemonCard";
+import { fetchPokemonGeneration } from "@/lib/data/fetch-pokemon-generation";
+import PokemonCard from "./pokemon-card";
 
 export default function GenerationDisplays() {
     const [pokemonList, setPokemon] = useState<PokemonData[] | null>(null);
@@ -25,7 +25,7 @@ export default function GenerationDisplays() {
 
     return (
         <div>
-            <div className="flex gap-4">
+            <div className="flex justify-center gap-4">
                 <GenerationBtn generation={1} onClick={handlePokemonBtnClick}/>
                 <GenerationBtn generation={2} onClick={handlePokemonBtnClick}/>
                 <GenerationBtn generation={3} onClick={handlePokemonBtnClick}/>
@@ -36,7 +36,7 @@ export default function GenerationDisplays() {
                 <GenerationBtn generation={8} onClick={handlePokemonBtnClick}/>
                 <GenerationBtn generation={9} onClick={handlePokemonBtnClick}/>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-8 mt-8">
+            <div className="flex flex-wrap gap-8 mt-8 justify-center">
                 {pokemonList &&  (
                     pokemonList.map((pokemon) => (
                         <PokemonCard key={pokemon.id} {...pokemon} />

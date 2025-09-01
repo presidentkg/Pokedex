@@ -1,6 +1,6 @@
-import PokemonCard from "@/components/pokemonCard";
-import PokemonSearch from "@/components/pokemonSearch";
-import { fetchPokemon } from "@/lib/data/fetchPokemons";
+import PokemonCard from "@/components/pokemon-card";
+import PokemonSearch from "@/components/pokemon-search";
+import { fetchPokemon } from "@/lib/data/fetch-pokemon";
 import { Pokemon, PokemonData} from "@/lib/interfaces";
 
 export default async function Search({

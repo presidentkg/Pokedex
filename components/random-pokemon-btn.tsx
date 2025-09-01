@@ -1,10 +1,10 @@
 "use client";
 
-import { fetchRandomPokemon } from "@/lib/data/randomPokemons";
+import { fetchRandomPokemon } from "@/lib/data/random-pokemon";
 import { PokemonData } from "@/lib/interfaces";
 import Image from "next/image";
 import { useState } from "react";
-import PokemonCard from "@/components/pokemonCard";
+import PokemonCard from "@/components/pokemon-card";
 
 export default function RandomPokemonBtn() {
     const [pokemon, setPokemon] = useState<PokemonData | null>(null);

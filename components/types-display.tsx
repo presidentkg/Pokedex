@@ -3,7 +3,7 @@
 import { useState } from "react";
 import PokemonCard from "./pokemon-card";
 import TypeBtn from "./type-btn";
-import { fetchPokemonType } from "@/lib/data/fetchPokemonType";
+import { fetchPokemonType } from "@/lib/data/fetch-pokemon-type";
 import { PokemonData } from "@/lib/interfaces";
 
 export default function TypeDisplays() {

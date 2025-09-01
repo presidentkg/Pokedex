@@ -1,4 +1,4 @@
-import GenerationDisplay from "@/components/generationDisplay";
+import GenerationDisplay from "@/components/generation-display";
 
 export default function Pokedex() {
   return (
