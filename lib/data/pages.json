@@ -9,10 +9,6 @@
             "label": "Pokedex"
         },
         {
-            "href": "/types",
-            "label": "Types"
-        },
-        {
             "href": "/search",
             "label": "Search"
         }
