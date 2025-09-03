@@ -13,9 +13,21 @@ export default function PokedexDisplays() {
     const [pokemonList, setPokemon] = useState<PokemonData[] | null>(null);
     const [activeGen, setActiveGen] = useState<number | null>(null);
     const [activeType, setActiveType] = useState<string | null>(null);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [allPokemon, setAllPokemon] = useState<PokemonData[] | null>(null);
+
+    const pokemonPerPage = 16;
+
+    const setPokemonToShow = (page: number, allPokemon: PokemonData[]) => {
+        const startIndex = (page - 1) * pokemonPerPage;
+        const endIndex = startIndex + pokemonPerPage;
+        setPokemon(allPokemon.slice(startIndex, endIndex));
+    };
 
     async function updatePokemonList(gen: number | null, type: string | null) {
         setPokemon(null);
+        setCurrentPage(1);
+
         if (!gen && !type) {
             return;
         }
@@ -31,7 +43,8 @@ export default function PokedexDisplays() {
                 pokemonData = await fetchPokemonGeneration(gen);
             else if(type)
                 pokemonData = await fetchPokemonType(type);
-            setPokemon(pokemonData);
+            setAllPokemon(pokemonData);
+            setPokemonToShow(currentPage, pokemonData);
 
         } catch (error){
             setPokemon(null);
@@ -49,6 +62,8 @@ export default function PokedexDisplays() {
         setActiveType(newType);
         updatePokemonList(activeGen, newType);
     };
+
+    const totalPages = allPokemon ? Math.ceil(allPokemon.length / pokemonPerPage) : 0;
 
     return (
         <div className="w-full mx-auto">
@@ -93,15 +108,57 @@ export default function PokedexDisplays() {
             </section>
             <section className="flex flex-col items-center gap-4 bg-gradient-to-br [background-image:linear-gradient(-10deg,_#F4E7FA,_#FFFFFF)] p-14 min-h-screen">
                 <h2 className="text-4xl">Pokédex</h2>
-                <div className="flex flex-wrap justify-center gap-8 mt-8">
+                <div className="flex flex-wrap justify-center gap-8 mt-8 w-1/2">
                     {pokemonList && pokemonList.length > 0 ? (
                         pokemonList.map((pokemon) => (
                             <PokemonCard key={pokemon.id} pokemon={pokemon} />
                     ))
                     ) : (pokemonList && pokemonList.length === 0) ? (
-                        <p className="text-center text-xl text-gray-600">No matching pokemon</p>
+                        <p className="text-center text-xl text-gray-600">No matching Pokemon</p>
                     ) : null}
                 </div>
+                {allPokemon && allPokemon.length > pokemonPerPage && (
+                    <div className="flex justify-center items-center gap-4 mt-8">
+                        <button
+                            className="bg-[#846ab6] text-white py-2 px-4 rounded-full disabled:bg-gray-400"
+                            onClick={() => {
+                                setCurrentPage(currentPage - 1);
+                                setPokemonToShow(currentPage - 1, allPokemon);
+                            }}
+                            disabled={currentPage === 1}
+                        >
+                            Previous
+                        </button>
+                        {
+                            Array.from({ length: totalPages },
+                                (_, i) => (
+                                    <button 
+                                    key={i}
+                                    className={`
+                                        cursor-pointer py-2 px-4 rounded-full
+                                        ${currentPage === i + 1 ? 'bg-[#846ab6] text-white' : 'text-gray-800'}`}
+                                    onClick={() =>{
+                                        setCurrentPage(i + 1);
+                                        setPokemonToShow(i + 1, allPokemon);
+                                    }}
+                                    disabled={currentPage === i + 1}
+                                    >
+                                        {i + 1}
+                                    </button>
+                                ))
+                        }
+                        <button
+                            className="bg-[#846ab6] text-white py-2 px-4 rounded-full disabled:bg-gray-400"
+                            onClick={() => {
+                                setCurrentPage(currentPage + 1);
+                                setPokemonToShow(currentPage + 1, allPokemon);
+                            }}
+                            disabled={currentPage === totalPages}
+                        >
+                            Next
+                        </button>
+                    </div>
+                )}
             </section>
         </div>
     );
