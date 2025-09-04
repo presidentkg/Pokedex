@@ -20,8 +20,8 @@ export default async function PokemonSearchResults({ query, currentPage }: { que
             const paginatedPokemons = allMatchingPokemons.slice(offset, offset + POKEMON_PER_PAGE);
             matchingPokemonData = await fetchPokemon(paginatedPokemons);
         }
-    } catch (e) {
-        return <div>Couldn't load pokemon, try again later</div>;
+    } catch (_error) {
+        return <div>Couldn&apos;t load pokemon, try again later</div>;
     }
 
     return (

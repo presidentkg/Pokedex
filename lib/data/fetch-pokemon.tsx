@@ -21,7 +21,7 @@ export async function fetchPokemon(
         }));
         transformedPokemons.sort((a, b) => a.name.localeCompare(b.name));
         return transformedPokemons;
-    } catch (e) {
+    } catch (_error) {
         return [];
     }
 }

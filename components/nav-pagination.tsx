@@ -5,7 +5,7 @@ const MAX_AMOUNT_BTN = 5;
 
 export default function PaginationNav({ page, totalPages, query }: { page: number; totalPages: number, query: string }) {
     let startBtn = Math.max(1, page - Math.floor(MAX_AMOUNT_BTN / 2));
-    let endBtn = Math.min(totalPages, startBtn + MAX_AMOUNT_BTN - 1);
+    const endBtn = Math.min(totalPages, startBtn + MAX_AMOUNT_BTN - 1);
     if (endBtn - startBtn + 1 < MAX_AMOUNT_BTN)
         startBtn = Math.max(1, endBtn - MAX_AMOUNT_BTN + 1);
 
