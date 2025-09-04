@@ -1,5 +1,6 @@
 import PokemonSearchBar from "@/components/pokemon-search-bar";
 import PokemonSearchResults from "@/components/pokemon-search-results";
+import { Suspense } from "react";
 
 export default async function Search({
     searchParams,
@@ -20,7 +21,9 @@ export default async function Search({
                 <div className="w-full max-w-4xl">
                     <PokemonSearchBar />
                 </div>
-                <PokemonSearchResults query={query} currentPage={currentPage} />
+                <Suspense fallback={<p>Loading search results...</p>}>
+                    <PokemonSearchResults query={query} currentPage={currentPage} />
+                </Suspense>
             </section>
         </div>
     )
