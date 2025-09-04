@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, FormEvent } from "react";
 
@@ -42,7 +43,7 @@ export default function PokemonSearchBar(){
                     onChange={handleInputChange}
                 />
                 <button className="flex items-center justify-center h-10 w-10 m-2 rounded-lg bg-blue-400 hover:bg-blue-500 transition-colors">
-                    <img
+                    <Image
                     src="/Search.svg"
                     alt="Search icon"
                     width={20}

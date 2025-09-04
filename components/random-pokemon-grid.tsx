@@ -6,8 +6,8 @@ export default async function randomPokemonGrid({ numberOfPokemonToFetch }: { nu
     let pokemonList: PokemonData[] = [];
     try {
         pokemonList = await fetchRandomPokemon(numberOfPokemonToFetch);
-    } catch (error) {
-        return <div>Couldn't load pokemon, try again later!</div>;
+    } catch (_error) {
+        return <p>Couldn&apos;t load pokemon, try again later!</p>;
     }
   return (
     <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-8 mt-8">

@@ -14,8 +14,8 @@ export default function RandomPokemonBtn() {
         const data = await fetchRandomPokemon(1);
         if(data.length !== 0)
           setPokemon(data[0]);
-      } catch (error) {
-        return <div>Couldn't load pokemon, try again later!</div>;
+      } catch (_error) {
+        return <div>Couldn&apos;t load pokemon, try again later!</div>;
       }
     };
   return(

@@ -6,7 +6,7 @@ export interface Pokemon{
 export interface PokemonData {
   name: string;
   id: number;
-  image: string;
+  image: string | null;
   types: string[];
   hp: number;
   attack: number;
@@ -26,4 +26,27 @@ export interface PokemonStat {
   stat: {
     name: string;
   };
+}
+
+export interface PokemonApiResponse {
+  id: number;
+  name: string;
+  sprites: {
+    other: {
+      "official-artwork": {
+        front_default: string | null;
+      };
+    };
+  };
+  types: {
+    type: {
+      name: string;
+    };
+  }[];
+  stats: {
+    base_stat: number;
+    stat: {
+      name: string;
+    };
+  }[];
 }
