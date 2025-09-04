@@ -16,6 +16,7 @@ export default async function PokemonSearchResults({ query, currentPage }: { que
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${POKEMON_FETCH_LIMIT}`);
             const { results } : { results: Pokemon[] } = await response.json();
             const allMatchingPokemons = results.filter((pokemon) => pokemon.name.includes(query.toLowerCase()));
+            allMatchingPokemons.sort((a, b) => a.name.localeCompare(b.name));
             pokemonCount = allMatchingPokemons.length;
             const paginatedPokemons = allMatchingPokemons.slice(offset, offset + POKEMON_PER_PAGE);
             matchingPokemonData = await fetchPokemon(paginatedPokemons);
