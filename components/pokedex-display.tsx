@@ -24,10 +24,11 @@ export default function PokedexDisplays() {
 
     const POKEMON_PER_PAGE = 16;
 
-    const setPokemonToShow = (page: number, allPokemon: PokemonData[]) => {
-        const startIndex = (page - 1) * POKEMON_PER_PAGE;
+    const setPokemonToShow = () => {
+        const startIndex = (currentPage - 1) * POKEMON_PER_PAGE;
         const endIndex = startIndex + POKEMON_PER_PAGE;
-        setPagePokemon(allPokemon.slice(startIndex, endIndex));
+        if(allPokemon)
+            setPagePokemon(allPokemon.slice(startIndex, endIndex));
     };
 
     async function updateAllPokemon(gen: number | null, type: string | null) {
@@ -54,7 +55,7 @@ export default function PokedexDisplays() {
             else if(type)
                 pokemonData = await fetchPokemonType(type);
             setAllPokemon(pokemonData);
-            setPokemonToShow(currentPage, pokemonData);
+            setPokemonToShow();
 
         } catch (_error){
             setPagePokemon(null);
@@ -147,7 +148,7 @@ export default function PokedexDisplays() {
                             className="bg-[#846ab6] text-white p-2 rounded disabled:bg-gray-400 flex items-center"
                             onClick={() => {
                                 setCurrentPage(currentPage - 1);
-                                setPokemonToShow(currentPage - 1, allPokemon);
+                                setPokemonToShow();
                             }}
                             disabled={currentPage === 1}
                         >
@@ -163,7 +164,7 @@ export default function PokedexDisplays() {
                                         ${currentPage === i + 1 ? 'bg-[#846ab6] text-white' : 'text-gray-800'}`}
                                     onClick={() =>{
                                         setCurrentPage(i + 1);
-                                        setPokemonToShow(i + 1, allPokemon);
+                                        setPokemonToShow();
                                     }}
                                     disabled={currentPage === i + 1}
                                     >
@@ -175,7 +176,7 @@ export default function PokedexDisplays() {
                             className="bg-[#846ab6] text-white p-2 rounded disabled:bg-gray-400 flex items-center"
                             onClick={() => {
                                 setCurrentPage(currentPage + 1);
-                                setPokemonToShow(currentPage + 1, allPokemon);
+                                setPokemonToShow();
                             }}
                             disabled={currentPage === totalPages}
                         >
