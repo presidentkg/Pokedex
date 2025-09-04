@@ -7,6 +7,7 @@ import { fetchPokemonGeneration } from "@/lib/data/fetch-pokemon-generation";
 import PokemonCard from "./pokemon-card";
 import TypeBtn from "./type-btn";
 import { fetchPokemonType } from "@/lib/data/fetch-pokemon-type";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 
 export default function PokedexDisplays() {
@@ -21,11 +22,11 @@ export default function PokedexDisplays() {
         type: string | null;
     }>({ status: false, gen: null, type: null });
 
-    const pokemonPerPage = 16;
+    const POKEMON_PER_PAGE = 16;
 
     const setPokemonToShow = (page: number, allPokemon: PokemonData[]) => {
-        const startIndex = (page - 1) * pokemonPerPage;
-        const endIndex = startIndex + pokemonPerPage;
+        const startIndex = (page - 1) * POKEMON_PER_PAGE;
+        const endIndex = startIndex + POKEMON_PER_PAGE;
         setPagePokemon(allPokemon.slice(startIndex, endIndex));
     };
 
@@ -76,7 +77,7 @@ export default function PokedexDisplays() {
         setActiveType(newType);
     };
 
-    const totalPages = allPokemon ? Math.ceil(allPokemon.length / pokemonPerPage) : 0;
+    const totalPages = allPokemon ? Math.ceil(allPokemon.length / POKEMON_PER_PAGE) : 0;
 
     return (
         <div className="w-full mx-auto">
@@ -140,17 +141,17 @@ export default function PokedexDisplays() {
                     </div>
                 )}
                 
-                {allPokemon && allPokemon.length > pokemonPerPage && (
+                {allPokemon && allPokemon.length > POKEMON_PER_PAGE && (
                     <div className="flex justify-center items-center gap-4 mt-8">
                         <button
-                            className="bg-[#846ab6] text-white py-2 px-4 rounded-full disabled:bg-gray-400"
+                            className="bg-[#846ab6] text-white p-2 rounded disabled:bg-gray-400 flex items-center"
                             onClick={() => {
                                 setCurrentPage(currentPage - 1);
                                 setPokemonToShow(currentPage - 1, allPokemon);
                             }}
                             disabled={currentPage === 1}
                         >
-                            Previous
+                            <ChevronLeft size={20} /> Previous
                         </button>
                         {
                             Array.from({ length: totalPages },
@@ -158,7 +159,7 @@ export default function PokedexDisplays() {
                                     <button 
                                     key={i}
                                     className={`
-                                        cursor-pointer py-2 px-4 rounded-full
+                                        cursor-pointer py-2 px-4 rounded
                                         ${currentPage === i + 1 ? 'bg-[#846ab6] text-white' : 'text-gray-800'}`}
                                     onClick={() =>{
                                         setCurrentPage(i + 1);
@@ -171,14 +172,14 @@ export default function PokedexDisplays() {
                                 ))
                         }
                         <button
-                            className="bg-[#846ab6] text-white py-2 px-4 rounded-full disabled:bg-gray-400"
+                            className="bg-[#846ab6] text-white p-2 rounded disabled:bg-gray-400 flex items-center"
                             onClick={() => {
                                 setCurrentPage(currentPage + 1);
                                 setPokemonToShow(currentPage + 1, allPokemon);
                             }}
                             disabled={currentPage === totalPages}
                         >
-                            Next
+                            Next <ChevronRight size={20} />
                         </button>
                     </div>
                 )}
