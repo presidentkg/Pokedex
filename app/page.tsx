@@ -1,6 +1,7 @@
 import SearchBar from "@/components/search-bar";
 import RandomPokemonBtn from "@/components/random-pokemon-btn";
 import RandomPokemonGrid from "@/components/random-pokemon-grid";
+import { Suspense } from "react";
 
 
 export default function Home() {
@@ -13,7 +14,9 @@ export default function Home() {
       </section>
       <section className="flex justify-center mt-10 mb-10">
         <div className="w-full max-w-lg">
-          <SearchBar />
+          <Suspense fallback={<p>Loading search bar...</p>}>
+            <SearchBar />
+          </Suspense>
         </div>
       </section>
       <section className="flex flex-col items-center gap-4 bg-gradient-to-br [background-image:linear-gradient(-10deg,_#F4E7FA,_#FFFFFF)] p-14">

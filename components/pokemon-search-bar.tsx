@@ -41,6 +41,7 @@ export default function PokemonSearchBar(){
                     className="flex-grow rounded-l-full text-gray-700 focus:outline-none px-4"
                     name="query"
                     onChange={handleInputChange}
+                    value={searchParams.get("query")?.toString() || ""}
                 />
                 <button className="flex items-center justify-center h-10 w-10 m-2 rounded-lg bg-blue-400 hover:bg-blue-500 transition-colors">
                     <Image
