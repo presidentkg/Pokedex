@@ -19,7 +19,9 @@ export default async function Search({
             </section>
             <section className="flex flex-col items-center gap-4 bg-gradient-to-br [background-image:linear-gradient(-10deg,_#F4E7FA,_#FFFFFF)] p-14 min-h-screen">
                 <div className="w-full max-w-4xl">
-                    <PokemonSearchBar />
+                    <Suspense fallback={<p>Loading search bar...</p>}>
+                        <PokemonSearchBar />
+                    </Suspense>
                 </div>
                 <Suspense fallback={<p>Loading search results...</p>}>
                     <PokemonSearchResults query={query} currentPage={currentPage} />
