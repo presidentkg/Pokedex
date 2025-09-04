@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GenerationBtn from "./generation-btn";
 import { PokemonData } from "@/lib/interfaces";
 import { fetchPokemonGeneration } from "@/lib/data/fetch-pokemon-generation";
@@ -10,25 +10,34 @@ import { fetchPokemonType } from "@/lib/data/fetch-pokemon-type";
 
 
 export default function PokedexDisplays() {
-    const [pokemonList, setPokemon] = useState<PokemonData[] | null>(null);
+    const [pagePokemon, setPagePokemon] = useState<PokemonData[] | null>(null);
     const [activeGen, setActiveGen] = useState<number | null>(null);
     const [activeType, setActiveType] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [allPokemon, setAllPokemon] = useState<PokemonData[] | null>(null);
+    const [isLoading, setIsLoading] = useState<{
+        status: boolean;
+        gen: number | null;
+        type: string | null;
+    }>({ status: false, gen: null, type: null });
 
     const pokemonPerPage = 16;
 
     const setPokemonToShow = (page: number, allPokemon: PokemonData[]) => {
         const startIndex = (page - 1) * pokemonPerPage;
         const endIndex = startIndex + pokemonPerPage;
-        setPokemon(allPokemon.slice(startIndex, endIndex));
+        setPagePokemon(allPokemon.slice(startIndex, endIndex));
     };
 
-    async function updatePokemonList(gen: number | null, type: string | null) {
-        setPokemon(null);
+    async function updateAllPokemon(gen: number | null, type: string | null) {
+        setPagePokemon(null);
         setCurrentPage(1);
 
+        setIsLoading({status: true, gen: gen, type: type});
+
         if (!gen && !type) {
+            setAllPokemon(null);
+            setIsLoading({ status: false, gen: null, type: null });
             return;
         }
 
@@ -47,20 +56,24 @@ export default function PokedexDisplays() {
             setPokemonToShow(currentPage, pokemonData);
 
         } catch (error){
-            setPokemon(null);
+            setPagePokemon(null);
+        } finally {
+            setIsLoading({status: false, gen: null, type: null});
         }
     }
     
+    useEffect(() => {
+    updateAllPokemon(activeGen, activeType);
+    }, [activeGen, activeType]);
+
     const handleGenBtnClick = (gen: number) => {
         const newGen = gen === activeGen ? null : gen;
         setActiveGen(newGen);
-        updatePokemonList(newGen, activeType);
     };
 
     const handleTypeBtnClick = (type: string) => {
         const newType = type === activeType ? null : type;
         setActiveType(newType);
-        updatePokemonList(activeGen, newType);
     };
 
     const totalPages = allPokemon ? Math.ceil(allPokemon.length / pokemonPerPage) : 0;
@@ -108,15 +121,25 @@ export default function PokedexDisplays() {
             </section>
             <section className="flex flex-col items-center gap-4 bg-gradient-to-br [background-image:linear-gradient(-10deg,_#F4E7FA,_#FFFFFF)] p-14 min-h-screen">
                 <h2 className="text-4xl">Pokédex</h2>
-                <div className="flex flex-wrap justify-center gap-8 mt-8 w-1/2">
-                    {pokemonList && pokemonList.length > 0 ? (
-                        pokemonList.map((pokemon) => (
-                            <PokemonCard key={pokemon.id} pokemon={pokemon} />
-                    ))
-                    ) : (pokemonList && pokemonList.length === 0) ? (
-                        <p className="text-center text-xl text-gray-600">No matching Pokemon</p>
-                    ) : null}
-                </div>
+                {isLoading.status ? (
+                    <p className="text-center text-xl text-gray-600">
+                        Loading
+                        {isLoading.gen ? ` gen ${isLoading.gen} ` : ""}
+                        {isLoading.gen && isLoading.type ? `and ${isLoading.type} type ` : isLoading.type ? ` ${isLoading.type} type ` : ""}
+                        pokémon    
+                    </p>
+                ) : (
+                    <div className="flex flex-wrap justify-center gap-8 mt-8 w-1/2">
+                        {pagePokemon && pagePokemon.length > 0 ? (
+                            pagePokemon.map((pokemon) => (
+                                <PokemonCard key={pokemon.id} pokemon={pokemon} />
+                        ))
+                        ) : (pagePokemon && pagePokemon.length === 0) ? (
+                            <p className="text-center text-xl text-gray-600">No matching Pokemon</p>
+                        ) : null}
+                    </div>
+                )}
+                
                 {allPokemon && allPokemon.length > pokemonPerPage && (
                     <div className="flex justify-center items-center gap-4 mt-8">
                         <button
