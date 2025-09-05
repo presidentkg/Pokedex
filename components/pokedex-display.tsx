@@ -55,7 +55,6 @@ export default function PokedexDisplays() {
             else if(type)
                 pokemonData = await fetchPokemonType(type);
             setAllPokemon(pokemonData);
-            setPokemonToShow();
 
         } catch (_error){
             setPagePokemon(null);
@@ -67,6 +66,10 @@ export default function PokedexDisplays() {
     useEffect(() => {
     updateAllPokemon(activeGen, activeType);
     }, [activeGen, activeType]);
+
+    useEffect(() => {
+        setPokemonToShow();
+    }, [currentPage, allPokemon]);
 
     const handleGenBtnClick = (gen: number) => {
         const newGen = gen === activeGen ? null : gen;
